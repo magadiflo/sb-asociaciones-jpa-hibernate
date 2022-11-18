@@ -14,6 +14,18 @@ public class Factura {
 
     private Long total;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id") // Definimos explícitamente el nombre de la FK
+    private Cliente cliente; // Por defecto crea un atributo (será el FK) llamado: cliente_id
+
+    public Factura() {
+    }
+
+    public Factura(String descripcion, Long total) {
+        this.descripcion = descripcion;
+        this.total = total;
+    }
+
     public Long getId() {
         return id;
     }
@@ -36,6 +48,14 @@ public class Factura {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
