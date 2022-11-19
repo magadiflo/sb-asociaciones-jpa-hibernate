@@ -3,8 +3,8 @@ package com.asociaciones.jpa.app.unidireccional.v1.OneToMany.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "direcciones")
-public class Direccion {
+@Table(name = "direcciones_default")
+public class DireccionDefault {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,10 +16,10 @@ public class Direccion {
 
     private Integer lote;
 
-    public Direccion() {
+    public DireccionDefault() {
     }
 
-    public Direccion(String avenida, String manzana, Integer lote) {
+    public DireccionDefault(String avenida, String manzana, Integer lote) {
         this.avenida = avenida;
         this.manzana = manzana;
         this.lote = lote;
