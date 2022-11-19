@@ -1,6 +1,7 @@
 package com.asociaciones.jpa.app.bidireccional.v1.OneToMany_ManyToOne.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -41,29 +42,27 @@ public class Customer {
      * o solo debemos dejar uno de los dos, ya que si dejamos ambos se generará
      * un bucle infinito.
      *
-     *
-     *
      * @JsonIgnoreProperties omite las propiedades lógicas especificadas en
      * la serialización y deserialización de JSON. En este caso, la propiedad
      * customer ha sido especificada en el @JsonIgnoreProperties, por lo tanto,
      * esta propiedad no participará en la Serialización y deserialización de JSON,
      * de esta forma evitamos que se genere un ciclo infinito ya que estamos en
      * uan relación BIDIRECCIONAL.
-     *
+     * <p>
      * allowGetters = true, se permitirán los getters para las propiedades lógicas
      * especificadas. Significa que las propiedades lógicas especificadas en
      * @JsonIgnoreProperties participará en la serialización de JSON, pero
      * NO en la deserialización.
-     *
+     * <p>
      * allowSetters = true, se permitirán los setters para las propiedades lógicas
      * especificadas. Significa que las propiedades lógicas especificadas en
      * @JsonIgnoreProperties participarán en la DESEREALIZACIÓN de JSON, pero
      * NO en la serialización.
-     *
+     * <p>
      * NOTA:
      * La SERIALIZACIÓN es el proceso que consiste en convertir la
      * representación de un objeto en un stream (flujo de secuencia) de bytes.
-     *
+     * <p>
      * La DESEREALIZACIÓN consiste en reconstruir un objeto a partir de un
      * stream de bytes.
      */
@@ -132,8 +131,18 @@ public class Customer {
     }
 
     public void setInvoices(List<Invoice> invoices) {
-        this.invoices = invoices;
+        // Elimina todos los elementos de la lista, la dejamos vacía.
+        // Cada elemento de la lista que viene en este parámetro será agregada con el método addInvoice(...)
+        this.invoices.clear();
+        invoices.forEach(this::addInvoice);
     }
+
+    //********* IMPORTANTE ESTABLECER LA RELACIÓN EN AMBOS LADOS *********
+    public void addInvoice(Invoice invoice) {
+        this.invoices.add(invoice);
+        invoice.setCustomer(this); // Para que guarde la FK de customer en tabla Invoice (atributo customer_id) de la BD.
+    }
+    //*********
 
     @Override
     public String toString() {

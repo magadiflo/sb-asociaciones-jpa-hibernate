@@ -4,9 +4,7 @@ import com.asociaciones.jpa.app.bidireccional.v1.OneToMany_ManyToOne.entity.Cust
 import com.asociaciones.jpa.app.bidireccional.v1.OneToMany_ManyToOne.repository.ICustomerRepository;
 import com.asociaciones.jpa.app.bidireccional.v1.OneToMany_ManyToOne.repository.IInvoiceRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +24,11 @@ public class CustomerResource {
     public ResponseEntity<?> listarClientes() {
         List<Customer> customers = (List<Customer>) this.customerRepository.findAll();
         return ResponseEntity.ok(customers);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> guardarCustomerConInvoices(@RequestBody Customer customer) {
+        return ResponseEntity.ok(this.customerRepository.save(customer));
     }
 
 
