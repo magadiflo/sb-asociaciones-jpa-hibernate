@@ -63,6 +63,16 @@ public class Proveedor {
         this.proveedorDetalle = proveedorDetalle;
     }
 
+    public void addProveedorDetalle(ProveedorDetalle proveedorDetalle) {
+        this.proveedorDetalle = proveedorDetalle;
+        proveedorDetalle.setProveedor(this);
+    }
+
+    public void removeProveedorDetalle() {
+        this.proveedorDetalle.setProveedor(null);
+        this.proveedorDetalle = null;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Proveedor{");
