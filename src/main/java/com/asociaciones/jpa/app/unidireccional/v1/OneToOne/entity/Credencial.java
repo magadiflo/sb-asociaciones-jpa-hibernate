@@ -32,6 +32,7 @@ public class Credencial {
      * es dueño de la relación es Credencial
      */
     @OneToOne
+    @JoinColumn(name = "usuario_id") // Por defecto crea el fk usuario_id, pero nosotros seremos explícitos
     private Usuario usuario;
 
     public Credencial() {
