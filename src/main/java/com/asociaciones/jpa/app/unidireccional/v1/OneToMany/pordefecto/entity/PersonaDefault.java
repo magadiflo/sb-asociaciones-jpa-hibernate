@@ -1,4 +1,4 @@
-package com.asociaciones.jpa.app.unidireccional.v1.OneToMany.entity;
+package com.asociaciones.jpa.app.unidireccional.v1.OneToMany.pordefecto.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -35,8 +35,17 @@ public class PersonaDefault {
      * ) engine=InnoDB
      */
 
+    /**
+     * Si quisieramos agregar nuestra propia tabla intermedia y no la que
+     * JPA/Hibernate crea por defecto, podemos agregar la siguiente configuración:
+     *
+    @JoinTable(name = "tbl_personasdefault_direccionesdefault",
+        joinColumns = @JoinColumn(name = "personadefault_id"),
+        inverseJoinColumns = @JoinColumn(name = "direcciondefault_id"),
+        uniqueConstraints = @UniqueConstraint(columnNames = { "direcciondefault_id" }))
+     */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // Las definimos porque Persona es una clase principal
-    private List<com.asociaciones.jpa.app.unidireccional.v1.OneToMany.entity.DireccionDefault> direccionesDefault;
+    private List<DireccionDefault> direccionesDefault;
 
     @PrePersist
     private void prePersist() {
@@ -85,11 +94,11 @@ public class PersonaDefault {
         this.createAt = createAt;
     }
 
-    public List<com.asociaciones.jpa.app.unidireccional.v1.OneToMany.entity.DireccionDefault> getDireccionesDefault() {
+    public List<DireccionDefault> getDireccionesDefault() {
         return direccionesDefault;
     }
 
-    public void setDireccionesDefault(List<com.asociaciones.jpa.app.unidireccional.v1.OneToMany.entity.DireccionDefault> direccionesDefault) {
+    public void setDireccionesDefault(List<DireccionDefault> direccionesDefault) {
         this.direccionesDefault = direccionesDefault;
     }
 

@@ -1,8 +1,8 @@
-package com.asociaciones.jpa.app.unidireccional.v1.OneToMany.resource;
+package com.asociaciones.jpa.app.unidireccional.v1.OneToMany.pordefecto.resource;
 
-import com.asociaciones.jpa.app.unidireccional.v1.OneToMany.entity.PersonaDefault;
-import com.asociaciones.jpa.app.unidireccional.v1.OneToMany.repository.IDireccionRepositoryDefault;
-import com.asociaciones.jpa.app.unidireccional.v1.OneToMany.repository.IPersonaRepositoryDefault;
+import com.asociaciones.jpa.app.unidireccional.v1.OneToMany.pordefecto.entity.PersonaDefault;
+import com.asociaciones.jpa.app.unidireccional.v1.OneToMany.pordefecto.repository.IDireccionRepositoryDefault;
+import com.asociaciones.jpa.app.unidireccional.v1.OneToMany.pordefecto.repository.IPersonaRepositoryDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

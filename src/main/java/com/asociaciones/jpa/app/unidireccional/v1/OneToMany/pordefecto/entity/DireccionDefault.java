@@ -1,4 +1,4 @@
-package com.asociaciones.jpa.app.unidireccional.v1.OneToMany.entity;
+package com.asociaciones.jpa.app.unidireccional.v1.OneToMany.pordefecto.entity;
 
 import javax.persistence.*;
 
