@@ -21,6 +21,10 @@ public class ProveedorResource {
 
     @GetMapping
     public ResponseEntity<?> listarProveedores() {
+        return ResponseEntity.ok(this.proveedorRepository.findAll());
+    }
+    @GetMapping(path = "/detalles")
+    public ResponseEntity<?> listarProveedorDetalles() {
         return ResponseEntity.ok(this.proveedorDetalleRepository.findAll());
     }
 }

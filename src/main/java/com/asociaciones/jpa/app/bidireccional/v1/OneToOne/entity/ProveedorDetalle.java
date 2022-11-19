@@ -1,9 +1,11 @@
 package com.asociaciones.jpa.app.bidireccional.v1.OneToOne.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "proveedor_detalles")
+@Table(name = "proveedores_detalles")
 public class ProveedorDetalle {
 
     @Id
@@ -11,6 +13,11 @@ public class ProveedorDetalle {
     private Long id;
 
     private String tipo;
+
+    @JsonIgnoreProperties(value = {"proveedorDetalle"})
+    @OneToOne
+    @JoinColumn(name = "proveedor_id") // Aquí estará la FK
+    private Proveedor proveedor;
 
     public ProveedorDetalle() {
     }
@@ -33,6 +40,14 @@ public class ProveedorDetalle {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     @Override

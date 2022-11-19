@@ -1,5 +1,7 @@
 package com.asociaciones.jpa.app.bidireccional.v1.OneToOne.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,13 @@ public class Proveedor {
     private String nombre;
 
     private String ruc;
+
+    /**
+     * Nunca pueden estar juntos el @JoinColumn con el mappedBy
+     */
+    @JsonIgnoreProperties(value = {"proveedor"})
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "proveedor")
+    private ProveedorDetalle proveedorDetalle;
 
     public Proveedor() {
     }
@@ -44,6 +53,14 @@ public class Proveedor {
 
     public void setRuc(String ruc) {
         this.ruc = ruc;
+    }
+
+    public ProveedorDetalle getProveedorDetalle() {
+        return proveedorDetalle;
+    }
+
+    public void setProveedorDetalle(ProveedorDetalle proveedorDetalle) {
+        this.proveedorDetalle = proveedorDetalle;
     }
 
     @Override
