@@ -142,6 +142,13 @@ public class Customer {
         this.invoices.add(invoice);
         invoice.setCustomer(this); // Para que guarde la FK de customer en tabla Invoice (atributo customer_id) de la BD.
     }
+
+    public void removeInvoice(Invoice invoice) {
+        this.invoices.remove(invoice);
+        // Al invoice le quitamos la FK de customer, quedando huérfana,
+        // de esa manera como tenemos el orphanRemoval=true, se eliminará
+        invoice.setCustomer(null);
+    }
     //*********
 
     @Override
