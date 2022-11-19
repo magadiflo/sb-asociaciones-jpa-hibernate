@@ -2,6 +2,8 @@ package com.asociaciones.jpa.app.unidireccional.v1.ManyToMany.resource;
 
 import com.asociaciones.jpa.app.unidireccional.v1.ManyToMany.repository.IAlumnoRepository;
 import com.asociaciones.jpa.app.unidireccional.v1.ManyToMany.repository.ICursoRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +18,11 @@ public class AlumnoResource {
     public AlumnoResource(IAlumnoRepository alumnoRepository, ICursoRepository cursoRepository) {
         this.alumnoRepository = alumnoRepository;
         this.cursoRepository = cursoRepository;
+    }
+
+    @GetMapping
+    public ResponseEntity<?> listarAlumnos() {
+        return ResponseEntity.ok(this.alumnoRepository.findAll());
     }
 
 
