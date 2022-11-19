@@ -1,5 +1,6 @@
 package com.asociaciones.jpa.app.bidireccional.v1.OneToMany_ManyToOne.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,7 +40,34 @@ public class Customer {
      * NOTA 03. Debemos evitar en el método toString() el atributo Invoice o Customer,
      * o solo debemos dejar uno de los dos, ya que si dejamos ambos se generará
      * un bucle infinito.
+     *
+     *
+     *
+     * @JsonIgnoreProperties omite las propiedades lógicas especificadas en
+     * la serialización y deserialización de JSON. En este caso, la propiedad
+     * customer ha sido especificada en el @JsonIgnoreProperties, por lo tanto,
+     * esta propiedad no participará en la Serialización y deserialización de JSON,
+     * de esta forma evitamos que se genere un ciclo infinito ya que estamos en
+     * uan relación BIDIRECCIONAL.
+     *
+     * allowGetters = true, se permitirán los getters para las propiedades lógicas
+     * especificadas. Significa que las propiedades lógicas especificadas en
+     * @JsonIgnoreProperties participará en la serialización de JSON, pero
+     * NO en la deserialización.
+     *
+     * allowSetters = true, se permitirán los setters para las propiedades lógicas
+     * especificadas. Significa que las propiedades lógicas especificadas en
+     * @JsonIgnoreProperties participarán en la DESEREALIZACIÓN de JSON, pero
+     * NO en la serialización.
+     *
+     * NOTA:
+     * La SERIALIZACIÓN es el proceso que consiste en convertir la
+     * representación de un objeto en un stream (flujo de secuencia) de bytes.
+     *
+     * La DESEREALIZACIÓN consiste en reconstruir un objeto a partir de un
+     * stream de bytes.
      */
+    @JsonIgnoreProperties(value = {"customer"}, allowSetters = true)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customer")
     private List<Invoice> invoices;
 

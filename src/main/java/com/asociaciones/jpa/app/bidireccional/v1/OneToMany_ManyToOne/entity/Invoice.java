@@ -1,5 +1,6 @@
 package com.asociaciones.jpa.app.bidireccional.v1.OneToMany_ManyToOne.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class Invoice {
 
     private Long total;
 
+    @JsonIgnoreProperties(value = {"invoices"})
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
