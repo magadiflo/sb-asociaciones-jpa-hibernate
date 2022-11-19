@@ -14,6 +14,26 @@ public class Credencial {
 
     private String password;
 
+    /**
+     * La relación OneToOne en un tipo de
+     * relación UNIDIRECCIONAL, podría estar
+     * en el lado del Usuario y no en Credencial,
+     * eso dependería del análisis que hagamos
+     * y de cómo queremos manejarlo. Ahora, si fuese
+     * una relación BIDIRECCIONAL, no habría qué tantas
+     * vueltas darle al asunto, ya que la relación
+     * estaría en ambos sentidos.
+     * <p>
+     * En este tipo de relación unidireccional, la
+     * FK estaría en la tabla cuya clase tiene
+     * la anotación @OneToOne, eso significa que en la
+     * tabla credenciales de la BD tendríamos un FK
+     * llamado usuario_id, por lo tanto, quien
+     * es dueño de la relación es Credencial
+     */
+    @OneToOne
+    private Usuario usuario;
+
     public Credencial() {
     }
 
@@ -55,6 +75,14 @@ public class Credencial {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
