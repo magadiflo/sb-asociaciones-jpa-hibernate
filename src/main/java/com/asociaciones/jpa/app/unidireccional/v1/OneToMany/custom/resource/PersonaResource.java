@@ -39,4 +39,14 @@ public class PersonaResource {
         });
         return ResponseEntity.ok(this.personaRepository.save(persona));
     }
+
+    @PostMapping(path = "/{personaId}/direccion/{direccionId}")
+    public ResponseEntity<?> eliminarDireccionDePersona(@PathVariable Long direccionId, @PathVariable Long personaId) {
+        Persona persona = this.personaRepository.findById(personaId).orElseThrow();
+        Direccion d1 = this.direccionRepository.findById(direccionId).orElseThrow();
+        persona.getDirecciones().remove(d1);
+
+        return ResponseEntity.ok(this.personaRepository.save(persona));
+    }
+
 }
