@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/unidireccional/v1/one-to-many/default/personas")
-public class PersonaResource {
+public class PersonaResourceDefault {
 
     private final IPersonaRepositoryDefault personaRepositoryDefault;
     private final IDireccionRepositoryDefault direccionRepositoryDefault;
 
-    public PersonaResource(IPersonaRepositoryDefault personaRepositoryDefault, IDireccionRepositoryDefault direccionRepositoryDefault) {
+    public PersonaResourceDefault(IPersonaRepositoryDefault personaRepositoryDefault, IDireccionRepositoryDefault direccionRepositoryDefault) {
         this.personaRepositoryDefault = personaRepositoryDefault;
         this.direccionRepositoryDefault = direccionRepositoryDefault;
     }
