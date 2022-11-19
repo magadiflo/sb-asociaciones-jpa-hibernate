@@ -20,6 +20,21 @@ public class Persona {
     @Column(name = "create_at")
     private LocalDateTime createAt;
 
+    /**
+     * Como se ve en el directorio default, también hay una relación
+     * OneToMany, pero por defecto allí Hibernate crea una tabla intermedia.
+     * En este directorio /custom, cambiaremos ese comportamiento, donde
+     * eliminaremos esa tabla intermedia creada por defecto y estableceremos
+     * una FK en la tabla de cardinalidad Muchos (direcciones) de la BD.
+     * Para eso usamos la anotación @JoinColumn(name = "persona_id") para
+     * especificarle que la FK irá en la tabla direcciones de la BD, así ya
+     * no creará esa tabla intermedia.
+     *
+     * "persona_id", ese atributo será la FK y lo colocará en la tabla direcciones de la BD.
+     *
+     * ¡IMPORTANTE!, la relación debe ser UNIDIRECCIONAL
+     */
+    @JoinColumn(name = "persona_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // Las definimos porque Persona es una clase principal
     private List<Direccion> direcciones;
 
