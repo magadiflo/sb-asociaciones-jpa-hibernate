@@ -14,6 +14,10 @@ public class Invoice {
 
     private Long total;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public Invoice() {
     }
 
@@ -44,6 +48,14 @@ public class Invoice {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
