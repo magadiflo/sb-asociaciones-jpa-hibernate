@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "profesores")
@@ -64,7 +65,31 @@ public class Profesor {
     }
 
     public void setAsignaturas(List<Asignatura> asignaturas) {
-        this.asignaturas = asignaturas;
+        this.asignaturas.clear();
+        asignaturas.forEach(this::addAsignatura);
+    }
+
+    public void addAsignatura(Asignatura asignatura) {
+        this.asignaturas.add(asignatura);
+        asignatura.getProfesors().add(this);
+    }
+
+    public void removeAsignatura(Asignatura asignatura) {
+        asignatura.getProfesors().remove(this);
+        this.asignaturas.remove(asignatura);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profesor profesor = (Profesor) o;
+        return Objects.equals(id, profesor.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
