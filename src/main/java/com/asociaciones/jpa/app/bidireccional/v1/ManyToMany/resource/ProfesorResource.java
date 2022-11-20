@@ -2,6 +2,8 @@ package com.asociaciones.jpa.app.bidireccional.v1.ManyToMany.resource;
 
 import com.asociaciones.jpa.app.bidireccional.v1.ManyToMany.repository.IAsignaturaRepository;
 import com.asociaciones.jpa.app.bidireccional.v1.ManyToMany.repository.IProfesorRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,5 +19,9 @@ public class ProfesorResource {
         this.asignaturaRepository = asignaturaRepository;
     }
 
+    @GetMapping
+    public ResponseEntity<?> listarProfesores() {
+        return ResponseEntity.ok(this.profesorRepository.findAll());
+    }
 
 }

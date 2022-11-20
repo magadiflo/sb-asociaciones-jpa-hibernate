@@ -1,6 +1,9 @@
 package com.asociaciones.jpa.app.bidireccional.v1.ManyToMany.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "asignaturas")
@@ -11,6 +14,10 @@ public class Asignatura {
     private Long id;
 
     private String titulo;
+
+    @JsonIgnoreProperties(value = {"asignaturas"}, allowSetters = true)
+    @ManyToMany(mappedBy = "asignaturas")
+    private List<Profesor> profesors;
 
     public Asignatura() {
     }
@@ -33,6 +40,14 @@ public class Asignatura {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public List<Profesor> getProfesors() {
+        return profesors;
+    }
+
+    public void setProfesors(List<Profesor> profesors) {
+        this.profesors = profesors;
     }
 
     @Override
